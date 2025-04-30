@@ -1,3 +1,4 @@
+---
 - name: Install Java (required for Tomcat)
   apt:
     name: default-jdk
@@ -15,31 +16,34 @@
     group: tomcat
     home: /opt/tomcat
 
-- name: Download Tomcat 9
-  get_url:
-    url: https://downloads.apache.org/tomcat/tomcat-9/v9.0.85/bin/apache-tomcat-9.0.85.tar.gz
-    dest: /tmp/apache-tomcat-9.tar.gz
-
-- name: Create /opt/tomcat directory
+- name: Create Tomcat directory
   file:
     path: /opt/tomcat
     state: directory
+    owner: tomcat
+    group: tomcat
 
-- name: Extract Tomcat
+- name: Download Tomcat 9
+  get_url:
+    url: https://downloads.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz
+    dest: /tmp/apache-tomcat-9.tar.gz
+
+- name: Extract Tomcat archive
   unarchive:
     src: /tmp/apache-tomcat-9.tar.gz
     dest: /opt/tomcat
     remote_src: yes
     extra_opts: [--strip-components=1]
 
-- name: Change ownership of /opt/tomcat
+- name: Set permissions for Tomcat
   file:
     path: /opt/tomcat
+    state: directory
     owner: tomcat
     group: tomcat
     recurse: yes
 
-- name: Set execute permissions on scripts
+- name: Set execute permissions on Tomcat scripts
   file:
     path: /opt/tomcat/bin
     mode: '0755'
