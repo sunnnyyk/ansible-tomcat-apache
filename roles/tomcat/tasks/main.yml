@@ -25,8 +25,8 @@
 
 - name: Download Tomcat 9
   get_url:
-    url: https://downloads.apache.org/tomcat/tomcat-9/v9.0.87/bin/apache-tomcat-9.0.87.tar.gz
-    dest: /tmp/apache-tomcat-9.tar.gz
+    url: "https://downloads.apache.org/tomcat/tomcat-9/v9.0.85/bin/apache-tomcat-9.0.85.tar.gz"
+    dest: "/tmp/apache-tomcat-9.tar.gz"
 
 - name: Extract Tomcat archive
   unarchive:
